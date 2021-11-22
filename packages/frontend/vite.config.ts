@@ -63,12 +63,8 @@ export default defineConfig({
           componentPrefix: '',
           // enabledCollections: ['carbon']
         }),
-      ],
+        // VuetifyResolver(),
 
-      // added for vuetify - https://github.com/antfu/vitesse/issues/85
-      customComponentResolvers: [
-        // https://github.com/vuetifyjs/vuetify/
-        VuetifyResolver(),
       ],
 
       dts: 'src/components.d.ts',
