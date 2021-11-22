@@ -13,6 +13,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import Inspect from 'vite-plugin-inspect'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
+import { VuetifyResolver } from './src/modules/vuetify'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
@@ -62,6 +63,12 @@ export default defineConfig({
           componentPrefix: '',
           // enabledCollections: ['carbon']
         }),
+      ],
+
+      // added for vuetify - https://github.com/antfu/vitesse/issues/85
+      customComponentResolvers: [
+        // https://github.com/vuetifyjs/vuetify/
+        VuetifyResolver(),
       ],
 
       dts: 'src/components.d.ts',

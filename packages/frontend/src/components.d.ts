@@ -13,6 +13,7 @@ declare module 'vue' {
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    MdiHandshakeOutline: typeof import('~icons/mdi/handshake-outline')['default']
     README: typeof import('./components/README.md')['default']
   }
 }
