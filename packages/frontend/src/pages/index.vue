@@ -14,7 +14,7 @@ const go = () => {
 
 <template>
   <div>
-    <p class="text-4xl">
+    <p class="text-8xl">
       <carbon-campsite class="inline-block" />
     </p>
     <p>
@@ -27,32 +27,6 @@ const go = () => {
     </p>
 
     <div class="py-4" />
-
-    <input
-      id="input"
-      v-model="name"
-      placeholder="what your name"
-      type="text"
-      autocomplete="false"
-      p="x-4 y-2"
-      w="250px"
-      text="center"
-      bg="transparent"
-
-      outline="none active:none"
-      @keydown.enter="go"
-    >
-    <label class="hidden" for="input">whats you name</label>
-
-    <div>
-      <button
-        class="m-3 text-sm btn"
-        :disabled="!name"
-        @click="go"
-      >
-        go
-      </button>
-    </div>
   </div>
 </template>
 
