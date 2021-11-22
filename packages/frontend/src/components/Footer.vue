@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { isDark, toggleDark } from '~/composables'
 
 </script>
 
@@ -10,20 +9,21 @@ import { isDark, toggleDark } from '~/composables'
         flat
         tile
         width="100%"
-        class="red lighten-1 text-center"
+
+        class="bg-red text-center"
       >
         <v-card-text>
           <v-btn
             class="mx-4"
             icon
           >
-            <mdi-handshake-outline size="48" />
+            <mdi-handshake-outline />
           </v-btn>
         </v-card-text>
 
         <v-divider></v-divider>
 
-        <v-card-text class="white--text">
+        <v-card-text class="">
           {{ new Date().getFullYear() }} — <strong>Twin Games</strong>
         </v-card-text>
       </v-card>

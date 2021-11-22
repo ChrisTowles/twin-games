@@ -8,9 +8,9 @@ context('Basic', () => {
     cy.url()
       .should('eq', 'http://localhost:3333/')
 
-    cy.contains('[Home Layout]')
+    cy.contains('Twin Games')
       .should('exist')
-
+    /*
     cy.get('#input')
       .type('Vitesse{Enter}')
       .url()
@@ -23,8 +23,9 @@ context('Basic', () => {
       .click()
       .url()
       .should('eq', 'http://localhost:3333/')
+      */
   })
-
+/*
   it('markdown', () => {
     cy.get('[title="About"]')
       .click()
@@ -34,4 +35,5 @@ context('Basic', () => {
     cy.get('pre.language-js')
       .should('exist')
   })
+  */
 })

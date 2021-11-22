@@ -4,7 +4,8 @@
     "johnsoncodehk.volar",
     "antfu.iconify",
     "dbaeumer.vscode-eslint",
-    "voorjaar.windicss-intellisense",
-    "csstools.postcss"
+    // "voorjaar.windicss-intellisense",
+    "csstools.postcss",
+    "vuetifyjs.vuetify-vscode"
   ]
 }

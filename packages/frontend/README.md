@@ -121,6 +121,21 @@ As this template is strongly opinionated, the following provides a curated list 
 - [vitesse-modernized-chrome-ext](https://github.com/xiaoluoboding/vitesse-modernized-chrome-ext) by [@xiaoluoboding](https://github.com/xiaoluoboding) - ⚡️ Modernized Chrome Extension Manifest V3 Vite Starter Template
 - [vitesse-stackter-clean-architect](https://github.com/shamscorner/vitesse-stackter-clean-architect) by [@shamscorner](https://github.com/shamscorner) - A modular clean architecture pattern in vitesse template
 
+
+## File-based Routing
+
+Routes will be auto-generated for Vue files in this dir with the same file structure.
+Check out [`vite-plugin-pages`](https://github.com/hannoeru/vite-plugin-pages) for more details.
+
+### Path Aliasing
+
+`~/` is aliased to `./src/` folder.
+
+For example, instead of having
+
+
+
+
 ## Try it now!
 
 ### GitHub Template
