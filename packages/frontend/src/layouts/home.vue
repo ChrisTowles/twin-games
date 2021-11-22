@@ -2,10 +2,13 @@
 <template>
   <v-app>
     <v-app-bar density="compact">
-      <v-app-bar-title>Twin Games</v-app-bar-title>
+      <v-app-bar-title>
+        <router-link to="/">
+          Twin Games
+        </router-link>
+      </v-app-bar-title>
       <v-spacer></v-spacer>
-      <v-btn text>Developer</v-btn>
-      <v-btn class="mr-3" text>Help</v-btn>
+
       <v-divider inset vertical></v-divider>
       <v-btn
         class="mr-4 ml-5"
@@ -18,11 +21,8 @@
     </v-app-bar>
     <v-main>
       <v-container grid-list-xl>
-        <router-view />  
-      </v-container>        
-      
-      
-      
+        <router-view />
+      </v-container>
     </v-main>
     <Footer />
   </v-app>

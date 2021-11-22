@@ -9,8 +9,7 @@
         flat
         tile
         width="100%"
-
-        class="bg-red text-center"
+        class="text-center"
       >
         <v-card-text>
           <v-btn
