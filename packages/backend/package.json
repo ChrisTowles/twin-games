@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "main": "build/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "dev": "cross-env rollup -c",
+    "test": "jest",
+    "lint": "eslint \"**/*.{ts,js}\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "nakama-runtime": "github:heroiclabs/nakama-common"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.10.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-external-helpers": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.2.0",
+    "pnpm": "^6.20.3",
+    "rollup": "^2.60.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
+  }
+}

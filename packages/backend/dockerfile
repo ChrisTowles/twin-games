@@ -1,0 +1,27 @@
+FROM node:alpine AS node-builder
+
+WORKDIR /backend
+
+
+## install needed deps
+RUN apk --no-cache add git
+RUN apk add --no-cache curl \
+    && curl -sL https://unpkg.com/@pnpm/self-installer | node
+
+
+
+COPY package*.json .
+
+
+
+RUN pnpm install
+# RUN pnpm type-check
+
+COPY . .
+RUN pnpm build
+
+FROM heroiclabs/nakama:3.4.0
+
+
+COPY --from=node-builder /backend/build/*.js /nakama/data/modules/build/
+COPY local.yml /nakama/data/

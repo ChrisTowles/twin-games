@@ -1,0 +1,6 @@
+# Nakama Config for local -- https://www.youtube.com/watch?v=FXguREV6Zf8&t=314s&ab_channel=HeroicLabs
+
+logger:
+  level: "Debug"
+runtime:
+  js_entrypoint: "build/index.js"
