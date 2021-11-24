@@ -13,8 +13,7 @@ import { UserModule } from '~/types'
 // Styles
 import 'vuetify/styles'
 
-// Setup Pinia
-// https://pinia.esm.dev/
+// Setup Vuetify
 export const install: UserModule = ({ app }) => {
   const vuetify = createVuetify({
     components,
