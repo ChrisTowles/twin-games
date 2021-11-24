@@ -15,10 +15,11 @@ COPY package*.json .
 
 
 RUN pnpm install
-# RUN pnpm type-check
 
 COPY . .
-RUN pnpm build
+
+RUN pnpm type-check
+RUN pnpm dev
 
 FROM heroiclabs/nakama:3.4.0
 
