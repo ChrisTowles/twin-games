@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { moduleName } from './constants'
-import { RpcFindMatchRequest, RpcFindMatchResponse } from './messages'
+import { RpcFindMatchRequest, RpcFindMatchResponse } from '@twin-games/shared'
 
 export const rpcFindMatch: nkruntime.RpcFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, payload: string): string {
   logger.info('rpcFindMatch!')

@@ -9,4 +9,5 @@
     "*.css": "postcss",
   },
   "editor.formatOnSave": false,
+  "github.copilot.enable":{ "markdown": true}
 }

@@ -74,3 +74,9 @@ export interface RpcFindMatchResponse {
 }
 
 export type Message = StartMessage|UpdateMessage|DoneMessage|MoveMessage|RpcFindMatchRequest|RpcFindMatchResponse
+
+// Shape of Response from `socket.onmatchdata`
+export interface OpCodeAndMessage {
+  op_code: OpCode
+  data: Message
+}

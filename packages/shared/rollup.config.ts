@@ -11,7 +11,7 @@ const libraryName = 'shared'
 export default {
   input: `src/main.ts`,
   output: [
-    // { file: pkg.main, name: camelCase(libraryName), format: 'system', sourcemap: true },
+    { file: pkg.main, name: camelCase(libraryName), format: 'system', sourcemap: true },
     { file: pkg.module, format: 'es', sourcemap: true },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')

@@ -1,6 +1,5 @@
 FROM node:alpine AS node-builder
 
-WORKDIR /backend
 
 
 ## install needed deps
@@ -10,19 +9,16 @@ RUN apk add --no-cache curl \
 
 
 
-COPY package*.json .
 
-
-
-RUN pnpm install
-
-COPY . .
-
-RUN pnpm type-check
-RUN pnpm dev
+## Setup Backend - if no build.
+#WORKDIR /backend
+#COPY package*.json .
+#COPY . .
+#RUN pnpm install
+#RUN pnpm type-check
+#RUN pnpm dev
 
 FROM heroiclabs/nakama:3.4.0
-
 
 COPY --from=node-builder /backend/build/*.js /nakama/data/modules/build/
 COPY local.yml /nakama/data/

@@ -1,9 +1,10 @@
 {
+  "name": "@twin-games/backend",
   "private": true,
   "main": "build/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
-    "dev": "cross-env rollup -c",
+    "dev": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "lint": "eslint \"**/*.{ts,js}\"",
     "type-check": "tsc --noEmit"

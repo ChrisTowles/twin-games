@@ -12,65 +12,18 @@
   "author": "chris.towles@gmail.com",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ChrisTowles/twin-games"
   },
   "license": "MIT",
   "engines": {
     "node": ">=6.0.0"
   },
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
-    "dev": "rollup -c rollup.config.ts -w",
-    "test": "jest --coverage",
-    "test:watch": "jest --coverage --watch",
-    "precommit": "lint-staged"
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "ts-jest"
-    },
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
-    },
-    "collectCoverageFrom": [
-      "src/*.{js,ts}"
-    ]
+    "dev": "concurrently \"pnpm run dev --filter @twin-games/shared\" \"pnpm run dev --filter @twin-games/frontend\"",
+    "build": "concurrently \"pnpm run build --filter @twin-games/shared\" \"pnpm run build --filter @twin-games/frontend\""
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.10.0",
-    "eslint": "^8.2.0",
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.6",
-    "@rollup/plugin-typescript": "^8.3.0",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.10",
-    "cross-env": "^7.0.3",
-    "jest": "^27.3.1",
-    "jest-config": "^27.3.1",
-    "lodash.camelcase": "^4.3.0",
-    "rollup": "^2.60.1",
-    "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-typescript2": "^0.31.1",
-    "shelljs": "^0.8.4",
-    "ts-jest": "^27.0.7",
+    "concurrently": "^6.4.0",
     "typescript": "^4.5.2"
   }
 }

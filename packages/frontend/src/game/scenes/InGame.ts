@@ -1,4 +1,5 @@
 
+import { Board, OpCode, DoneMessage, UpdateMessage, StartMessage, OpCodeAndMessage } from '@twin-games/shared'
 import { CONFIG } from '../config'
 import Nakama from '../nakama'
 
@@ -22,7 +23,7 @@ export default class InGame extends Phaser.Scene {
   }
 
   // ep4
-  updateBoard(board: any) {
+  updateBoard(board: Board) {
     board.forEach((element: any, index: number) => {
       const newImage = this.INDEX_TO_POS[index]
 
@@ -44,7 +45,7 @@ export default class InGame extends Phaser.Scene {
       this.headerText!.setText('Opponents turn!')
   }
 
-  setPlayerTurn(data: any) {
+  setPlayerTurn(data: StartMessage) {
     const userId = localStorage.getItem('user_id')
 
     if (data.marks[userId!] === 1) {
@@ -57,7 +58,7 @@ export default class InGame extends Phaser.Scene {
     }
   }
 
-  endGame(data: any) {
+  endGame(data: DoneMessage) {
     this.updateBoard(data.board)
 
     if (data.winner === this.playerPos)
@@ -70,19 +71,22 @@ export default class InGame extends Phaser.Scene {
   // ep4
   nakamaListener() {
     if (Nakama.socket !== null) {
-      Nakama.socket.onmatchdata = (result: any) => {
+      Nakama.socket.onmatchdata = (result: OpCodeAndMessage) => {
         switch (result.op_code) {
-          case 1:
+          case OpCode.START:
+            const startMsg = result.data as StartMessage;
             this.gameStarted = true
-            this.setPlayerTurn(result.data)
+            this.setPlayerTurn(startMsg)
             break
-          case 2:
-            console.log(result.data)
-            this.updateBoard(result.data.board)
+          case OpCode.UPDATE:  
+            const updateMsg = result.data as UpdateMessage
+            console.log(updateMsg)
+            
+            this.updateBoard(updateMsg.board)
             this.updatePlayerTurn()
             break
-          case 3:
-            this.endGame(result.data)
+          case OpCode.DONE:
+            this.endGame(result.data as DoneMessage)
             break
         }
       }

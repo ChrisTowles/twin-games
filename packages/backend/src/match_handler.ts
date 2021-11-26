@@ -14,7 +14,7 @@
 // limitations under the License.
 
 import { msecToSec } from './daily_rewards'
-import { Board, Mark, BoardPosition, UpdateMessage, OpCode, DoneMessage, StartMessage, MoveMessage, Message } from './messages'
+import { Board, Mark, BoardPosition, UpdateMessage, OpCode, DoneMessage, StartMessage, MoveMessage, Message } from '@twin-games/shared'
 
 const tickRate = 5
 const maxEmptySec = 30
