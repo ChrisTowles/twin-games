@@ -13,8 +13,11 @@ declare module 'vue' {
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    'Footer copy': typeof import('./components/Footer copy.vue')['default']
+    Game: typeof import('./components/game.vue')['default']
     MdiHandshakeOutline: typeof import('~icons/mdi/handshake-outline')['default']
     README: typeof import('./components/README.md')['default']
+    TicTacToeGame: typeof import('./components/tic-tac-toe-game.vue')['default']
   }
 }
 

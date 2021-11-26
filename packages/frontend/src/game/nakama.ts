@@ -1,4 +1,5 @@
 import { Client, Session, Socket } from '@heroiclabs/nakama-js'
+import { BoardPosition, MoveMessage, OpCode, RpcCommands, RpcFindMatchRequest } from '@twin-games/shared'
 
 
 import { v4 as uuidv4 } from 'uuid'
@@ -8,11 +9,6 @@ class Nakama {
   session: Session | null = null
   socket: Socket | null = null
   matchID = ''
-
-
-
-
-
   
   constructor() {
       
@@ -37,18 +33,21 @@ class Nakama {
     await this.socket.connect(this.session, true)
   }
 
-  async findMatch() { // ep4
-    const rpcid = 'find_match'
-    const matches = await this.client!.rpc(this.session!, rpcid, {})
+  async findMatch() {
+
+    const data: RpcFindMatchRequest = { fast: true };
+    console.log('Finding match...')
+    const matches = await this.client!.rpc(this.session!, RpcCommands.FindMatch, data)
 
     this.matchID = (matches.payload! as any).matchIds[0] as string
     await this.socket!.joinMatch(this.matchID)
     console.log('Matched joined!')
   }
 
-  async makeMove(index: number) { // ep4
-    const data = { position: index }
-    await this.socket!.sendMatchState(this.matchID, 4, data)
+  async makeMove(index: BoardPosition) {
+    console.log('sending move', index)
+    const data: MoveMessage = { position: index }
+    await this.socket!.sendMatchState(this.matchID, OpCode.MOVE, data)
     console.log('Match data sent')
   }
 }

@@ -24,16 +24,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-card elevation-11>
-    <v-card-text>
-      <h2>Game</h2>
+
+
+  <v-card>
+    <v-card-title>
+      Tac-Tac-Toe
+    </v-card-title>
       <div id="game-container" :style="`height: ${config.height}, width: ${config.width}`">
       </div>
-    </v-card-text>
   </v-card>
 </template>
-
-<route lang="yaml">
-meta:
-  layout: default
-</route>
