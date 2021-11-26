@@ -1,11 +1,8 @@
 {
-  "name": "@twin-games/shared",
+  "name": "twin-games",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "main": "dist/shared.umd.js",
-  "module": "dist/shared.es5.js",
-  "typings": "dist/types/shared.d.ts",
   "files": [
     "dist"
   ],
@@ -19,8 +16,9 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "dev": "concurrently \"pnpm run dev --filter @twin-games/shared\" \"pnpm run dev --filter @twin-games/frontend\"",
-    "build": "concurrently \"pnpm run build --filter @twin-games/shared\" \"pnpm run build --filter @twin-games/frontend\""
+    "dev": "concurrently \"pnpm run dev --filter @twin-games/backend\" \"pnpm run dev --filter @twin-games/backend\"",
+    "build": "concurrently \"pnpm run build --filter @twin-games/backend\" \"pnpm run build --filter @twin-games/backend\"",
+    "typecheck": "concurrently \"pnpm run typecheck --filter @twin-games/shared\""
   },
   "devDependencies": {
     "concurrently": "^6.4.0",
