@@ -52,11 +52,7 @@ So when I decided to try this project for the third time I was looking for an ex
 Also, as I'm already rather proficient in Typescript and Vue, I should be much more productive than I this time vs trying to learn flutter at the same time. 
 
 
-## TODO:
-[ ] add licenses to project
-  - viteness
-  - nakama
-  - heroic labs/xoxo
+
 
 
 
