@@ -8,7 +8,7 @@ RUN apk add --no-cache curl \
     && curl -sL https://unpkg.com/@pnpm/self-installer | node
 
 
-
+WORKDIR /backend
 
 ## Setup Backend - if no build.
 #WORKDIR /backend
@@ -17,6 +17,8 @@ RUN apk add --no-cache curl \
 #RUN pnpm install
 #RUN pnpm type-check
 #RUN pnpm dev
+
+COPY . . 
 
 FROM heroiclabs/nakama:3.4.0
 

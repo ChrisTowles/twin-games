@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@heroiclabs/nakama-js": "^2.3.0",
-    "@twin-games/shared": "workspace:^0.0.0",
+    "@twin-games/shared": "workspace:*",
     "@vueuse/core": "^7.1.1",
     "@vueuse/head": "^0.7.2",
     "nprogress": "^0.2.0",
@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.10.0",
-    "@cypress/request": "^2.88.9",
     "@iconify-json/carbon": "^1.0.9",
     "@iconify-json/mdi": "^1.0.10",
     "@types/markdown-it-link-attributes": "^3.0.1",
@@ -39,6 +38,7 @@
     "critters": "^0.0.15",
     "cross-env": "^7.0.3",
     "cypress": "^9.1.0",
+    "@cypress/request": "^2.88.9",
     "eslint": "^8.2.0",
     "eslint-plugin-cypress": "^2.12.1",
     "https-localhost": "^4.7.0",

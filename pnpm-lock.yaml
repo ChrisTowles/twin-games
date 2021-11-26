@@ -56,7 +56,7 @@ importers:
       '@heroiclabs/nakama-js': ^2.3.0
       '@iconify-json/carbon': ^1.0.9
       '@iconify-json/mdi': ^1.0.10
-      '@twin-games/shared': workspace:^0.0.0
+      '@twin-games/shared': workspace:*
       '@types/markdown-it-link-attributes': ^3.0.1
       '@types/nprogress': ^0.2.0
       '@types/uuid': ^8.3.3

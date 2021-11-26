@@ -16,9 +16,9 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "dev": "concurrently \"pnpm run dev --filter @twin-games/backend\" \"pnpm run dev --filter @twin-games/backend\"",
-    "build": "concurrently \"pnpm run build --filter @twin-games/backend\" \"pnpm run build --filter @twin-games/backend\"",
-    "typecheck": "concurrently \"pnpm run typecheck --filter @twin-games/shared\""
+    "dev": "concurrently \"pnpm run dev --filter @twin-games/shared\" \"pnpm run dev --filter @twin-games/backend\" \"pnpm run dev --filter @twin-games/frontend\"",
+    "build": "concurrently \"pnpm run build --filter @twin-games/shared\" \"pnpm run build --filter @twin-games/backend\" \"pnpm run build --filter @twin-games/frontend\"",
+    "typecheck": "concurrently \"pnpm run typecheck --filter @twin-games/shared\" \"pnpm run typecheck --filter @twin-games/backend\" \"pnpm run typecheck --filter @twin-games/frontend\""
   },
   "devDependencies": {
     "concurrently": "^6.4.0",
