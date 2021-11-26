@@ -2,10 +2,10 @@
   "recommendations": [
     "antfu.vite",
     "johnsoncodehk.volar",
-    // "antfu.iconify",
     "dbaeumer.vscode-eslint",
-    // "csstools.postcss",
     "vuetifyjs.vuetify-vscode",
-    "github.copilot"
+    "github.copilot",
+    "streetsidesoftware.code-spell-checker",
+    "valentjn.vscode-ltex"
   ]
 }

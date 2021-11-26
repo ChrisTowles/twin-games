@@ -13,7 +13,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import Inspect from 'vite-plugin-inspect'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
-import { VuetifyResolver } from './src/modules/vuetify'
+//import { VuetifyResolver } from './src/modules/vuetify'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
