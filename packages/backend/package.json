@@ -9,7 +9,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "nakama-runtime": "github:heroiclabs/nakama-common"
+    "nakama-runtime": "github:heroiclabs/nakama-common",
+    "@twin-games/shared": "workspace:*"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.10.0",

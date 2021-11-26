@@ -1,5 +1,7 @@
 import { Client, Session, Socket } from '@heroiclabs/nakama-js'
+
 import { v4 as uuidv4 } from 'uuid'
+
 
 class Nakama {
   client: Client | null = null
@@ -7,7 +9,9 @@ class Nakama {
   socket: Socket | null = null
   matchID = ''
 
+  test: DummyClass
   constructor() {
+      test = new DummyClass('test')
   }
 
   async authenticate() {

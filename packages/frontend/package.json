@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@heroiclabs/nakama-js": "^2.3.0",
+    "@twin-games/shared": "workspace:*",
     "@vueuse/core": "^6.7.6",
     "@vueuse/head": "^0.6.0",
     "nprogress": "^0.2.0",
@@ -36,6 +37,7 @@
     "critters": "^0.0.14",
     "cross-env": "^7.0.3",
     "cypress": "^8.7.0",
+    "@cypress/request": "2.88.7",
     "eslint": "^8.2.0",
     "eslint-plugin-cypress": "^2.12.1",
     "https-localhost": "^4.7.0",
