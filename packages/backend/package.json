@@ -5,9 +5,38 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
     "dev": "rollup -c rollup.config.ts -w",
-    "test": "jest",
+    
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
     "lint": "eslint \"**/*.{ts,js}\"",
     "type-check": "tsc --noEmit"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "src/*.{js,ts}"
+    ]
   },
   "dependencies": {
     "nakama-runtime": "github:heroiclabs/nakama-common",
@@ -28,6 +57,9 @@
     "pnpm": "^6.20.3",
     "rollup": "^2.60.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "jest": "^27.3.1",
+    "jest-config": "^27.3.1",
+    "ts-jest": "^27.0.7"
   }
 }

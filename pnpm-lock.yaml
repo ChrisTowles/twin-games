@@ -24,9 +24,12 @@ importers:
       '@twin-games/shared': workspace:*
       cross-env: ^7.0.3
       eslint: ^8.2.0
+      jest: ^27.3.1
+      jest-config: ^27.3.1
       nakama-runtime: github:heroiclabs/nakama-common
       pnpm: ^6.20.3
       rollup: ^2.60.1
+      ts-jest: ^27.0.7
       tslib: ^2.3.1
       typescript: ^4.4.4
     dependencies:
@@ -44,8 +47,11 @@ importers:
       '@rollup/plugin-typescript': 8.3.0_b13ef2726f6c50b174fe2dc72f675942
       cross-env: 7.0.3
       eslint: 8.3.0
+      jest: 27.3.1
+      jest-config: 27.3.1
       pnpm: 6.23.2
       rollup: 2.60.1
+      ts-jest: 27.0.7_4eed6c8fb237fdfddc93e385e1b4055b
       tslib: 2.3.1
       typescript: 4.5.2
 
@@ -7945,6 +7951,37 @@ packages:
   /tree-kill/1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
+    dev: true
+
+  /ts-jest/27.0.7_4eed6c8fb237fdfddc93e385e1b4055b:
+    resolution: {integrity: sha512-O41shibMqzdafpuP+CkrOL7ykbmLh+FqQrXEmV9CydQ5JBk0Sj0uAEF5TNNe94fZWKm3yYvWa/IbyV4Yg1zK2Q==}
+    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
+    hasBin: true
+    peerDependencies:
+      '@babel/core': '>=7.0.0-beta.0 <8'
+      '@types/jest': ^27.0.0
+      babel-jest: '>=27.0.0 <28'
+      jest: ^27.0.0
+      typescript: '>=3.8 <5.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@types/jest':
+        optional: true
+      babel-jest:
+        optional: true
+    dependencies:
+      '@babel/core': 7.16.0
+      bs-logger: 0.2.6
+      fast-json-stable-stringify: 2.1.0
+      jest: 27.3.1
+      jest-util: 27.3.1
+      json5: 2.2.0
+      lodash.memoize: 4.1.2
+      make-error: 1.3.6
+      semver: 7.3.5
+      typescript: 4.5.2
+      yargs-parser: 20.2.9
     dev: true
 
   /ts-jest/27.0.7_7e2a439bb7b53c38ff0c1a3c5e04c2c5:

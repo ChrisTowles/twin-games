@@ -15,7 +15,7 @@
 
 import { msecToSec } from './daily_rewards'
 import { Mark, UpdateMessage, OpCode, DoneMessage } from '@twin-games/shared'
-import { constants, MatchLabel, State } from './constants'
+import { constants, GameLoopResult, MatchLabel, State } from './constants'
 
 export const matchInit: nkruntime.MatchInitFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, params: {[key: string]: string}) {
   const fast = !!params.fast
@@ -40,6 +40,7 @@ export const matchInit: nkruntime.MatchInitFunction = function(ctx: nkruntime.Co
     winner: null,
     winnerPositions: null,
     nextGameRemainingTicks: 0,
+    gameLoopResult: GameLoopResult.Initialized,
   }
 
   return {

@@ -1,7 +1,9 @@
 {
   "cSpell.words": [
     "",
-    "Firestore"
+    "Firestore",
+    "nakama",
+    "nkruntime"
   ],
   "prettier.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",

@@ -23,6 +23,14 @@ export const winningPositions: number[][] = [
   [2, 4, 6],
 ]
 
+export enum GameLoopResult {
+    Unknown = 'Unknown',
+    Initialized = 'Initialized',
+    Start = 'Start',
+    NotEnoughPlayers = 'NotEnoughPlayers',   
+}
+  
+
 export interface MatchLabel {
   open: number
   fast: number
@@ -52,5 +60,9 @@ export interface State {
   // The winner positions.
   winnerPositions: BoardPosition[] | null
   // Ticks until the next game starts, if applicable.
-  nextGameRemainingTicks: number
+  nextGameRemainingTicks: number,
+
+  // added to debug the state the game loop is in.
+  gameLoopResult: GameLoopResult,
+
 }
