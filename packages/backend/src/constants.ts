@@ -6,7 +6,7 @@ import { Board, Mark, BoardPosition } from '@twin-games/shared'
 export const constants = {
     tickRate: 1,
     maxEmptySec: 30,
-    delaybetweenGamesSec: 5,
+    delayBetweenGamesSec: 5,
     turnTimeFastSec: 10,
     turnTimeNormalSec: 20
 }

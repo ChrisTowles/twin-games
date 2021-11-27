@@ -125,7 +125,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
           s.winnerPositions = winningPos
           s.playing = false
           s.deadlineRemainingTicks = 0
-          s.nextGameRemainingTicks = constants.delaybetweenGamesSec * constants.tickRate
+          s.nextGameRemainingTicks = constants.delayBetweenGamesSec * constants.tickRate
         }
         // Check if game is over because no more moves are possible.
         const tie = s.board.every(v => v !== null)
@@ -133,7 +133,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
           // Update state to reflect the tie, and schedule the next game.
           s.playing = false
           s.deadlineRemainingTicks = 0
-          s.nextGameRemainingTicks = constants.delaybetweenGamesSec * constants.tickRate
+          s.nextGameRemainingTicks = constants.delayBetweenGamesSec * constants.tickRate
         }
 
         let opCode: OpCode
@@ -174,7 +174,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
       s.playing = false
       s.winner = s.mark === Mark.O ? Mark.X : Mark.O
       s.deadlineRemainingTicks = 0
-      s.nextGameRemainingTicks = constants.delaybetweenGamesSec * constants.tickRate
+      s.nextGameRemainingTicks = constants.delayBetweenGamesSec * constants.tickRate
 
       const msg: DoneMessage = {
         board: s.board,

@@ -1,5 +1,5 @@
 import { Client, Session, Socket } from '@heroiclabs/nakama-js'
-import { BoardPosition, MoveMessage, OpCode, RpcCommands, RpcFindMatchRequest } from '@twin-games/shared'
+import { BoardPosition, MoveMessage, OpCode, RpcCommands, RpcFindMatchRequest, RpcFindMatchResponse } from '@twin-games/shared'
 
 
 import { v4 as uuidv4 } from 'uuid'
@@ -39,7 +39,7 @@ class Nakama {
     console.log('Finding match...')
     const matches = await this.client!.rpc(this.session!, RpcCommands.FindMatch, data)
 
-    this.matchID = (matches.payload! as any).matchIds[0] as string
+    this.matchID = (matches.payload! as RpcFindMatchResponse).matchIds[0]
     await this.socket!.joinMatch(this.matchID)
     console.log('Matched joined!')
   }

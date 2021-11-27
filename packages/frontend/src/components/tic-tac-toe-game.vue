@@ -5,7 +5,8 @@ import { onMounted } from 'vue'
 import MainMenu from '../game/scenes/MainMenu'
 import Matchmaking from '../game/scenes/Matchmaking'
 import InGame from '../game/scenes/InGame'
-import { CONFIG } from '~/game/config'
+import { CONFIG } from '../game/config'
+
 
 const config = {
   type: Phaser.AUTO,
