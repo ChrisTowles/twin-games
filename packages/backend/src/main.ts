@@ -14,9 +14,10 @@
 
 import { moduleName } from './constants'
 import { rpcReward } from './daily_rewards'
-import { matchInit, matchJoin, matchJoinAttempt, matchLeave, matchLoop, matchSignal, matchTerminate } from './match_handler'
+import { matchInit, matchJoin, matchJoinAttempt, matchLeave, matchSignal, matchTerminate } from './match_handler'
 import { rpcFindMatch } from './match_rpc'
 import { RpcCommands } from '@twin-games/shared'
+import { matchLoop } from './match_loop'
 
 
 function rpcHealthCheck(ctx: nkruntime.Context, logger: nkruntime.Logger /* nk: nkruntime.Nakama, payload: string */): string {

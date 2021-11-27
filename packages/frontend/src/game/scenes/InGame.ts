@@ -72,6 +72,8 @@ export default class InGame extends Phaser.Scene {
   nakamaListener() {
     if (Nakama.socket !== null) {
       Nakama.socket.onmatchdata = (result: OpCodeAndMessage) => {
+
+        console.log(`updateMsg: ${result.op_code}`, result.data)
         switch (result.op_code) {
           case OpCode.START:
             const startMsg = result.data as StartMessage;
