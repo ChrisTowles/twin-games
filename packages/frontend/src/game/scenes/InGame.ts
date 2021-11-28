@@ -26,11 +26,11 @@ export default class InGame extends Phaser.Scene {
   updateBoard(board: Board) {
     board.forEach((element: any, index: number) => {
       const newImage = this.INDEX_TO_POS[index]
-
-      if (element === 1)
+      console.log(element,index,newImage)
+      if (element === 0)
         this.phaser.add.image(newImage.x, newImage.y, 'O')
 
-      else if (element === 2)
+      else if (element === 1)
         this.phaser.add.image(newImage.x, newImage.y, 'X')
     })
   }
@@ -48,7 +48,8 @@ export default class InGame extends Phaser.Scene {
   setPlayerTurn(data: StartMessage) {
     const userId = localStorage.getItem('user_id')
 
-    if (data.marks[userId!] === 1) {
+
+    if (data.marks[userId!] === data.mark) {
       this.playerTurn = true
       this.playerPos = 1
       this.headerText!.setText('Your turn!')
@@ -73,23 +74,27 @@ export default class InGame extends Phaser.Scene {
     if (Nakama.socket !== null) {
       Nakama.socket.onmatchdata = (result: OpCodeAndMessage) => {
 
-        console.log(`updateMsg: ${result.op_code}`, result.data)
+        console.log(`onmatchdata: ${result.op_code}`, result.data)
         switch (result.op_code) {
           case OpCode.START:
+            console.log("start received:", result)
             const startMsg = result.data as StartMessage;
             this.gameStarted = true
             this.setPlayerTurn(startMsg)
             break
           case OpCode.UPDATE:  
             const updateMsg = result.data as UpdateMessage
-            console.log(updateMsg)
+            console.log("update received:", updateMsg)
             
             this.updateBoard(updateMsg.board)
             this.updatePlayerTurn()
             break
           case OpCode.DONE:
+            console.log("DONE received:", result)
             this.endGame(result.data as DoneMessage)
             break
+          default:
+            console.log('unhandled message received:', result)
         }
       }
     }

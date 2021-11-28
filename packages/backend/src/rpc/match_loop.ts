@@ -97,11 +97,14 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
   for (const message of messages) {
     switch (message.opCode) {
       case OpCode.MOVE:
-        logger.debug('Received move message from user: %v', s.marks)
+        logger.debug(`Received move message ${message.sender.userId} from current_mark ${s.mark} user: %v`, s.marks)
+
         const mark = s.marks[message.sender.userId] ?? null
         if (mark === null || s.mark !== mark) {
           // It is not this player's turn.
-          dispatcher.broadcastMessage(OpCode.REJECTED, null, [message.sender])
+
+          logger.debug('mark move message from user: %v', s.marks)
+          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "It is not this player's turn."}), [message.sender])
           continue
         }
 
@@ -111,13 +114,13 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
         }
         catch (error) {
           // Client sent bad data.
-          dispatcher.broadcastMessage(OpCode.REJECTED, null, [message.sender])
+          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "Malformed JSON received."}), [message.sender])
           logger.debug('Bad data received: %v', error)
           continue
         }
         if (s.board[msg.position]) {
           // Client sent a position outside the board, or one that has already been played.
-          dispatcher.broadcastMessage(OpCode.REJECTED, null, [message.sender])
+          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "Client sent a position outside the board, or one that has already been played."}), [message.sender])
           continue
         }
 
@@ -172,7 +175,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
         break
       default:
         // No other opcodes are expected from the client, so automatically treat it as an error.
-        dispatcher.broadcastMessage(OpCode.REJECTED, null, [message.sender])
+        dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "No other opcodes are expected from the client, so automatically treat it as an error."}), [message.sender])
         logger.error('Unexpected opcode received: %d', message.opCode)
     }
   }

@@ -7,8 +7,8 @@ export const constants = {
     tickRate: 1,
     maxEmptySec: 30,
     delayBetweenGamesSec: 5,
-    turnTimeFastSec: 10,
-    turnTimeNormalSec: 20
+    turnTimeFastSec: 30,
+    turnTimeNormalSec: 60
 }
 
 

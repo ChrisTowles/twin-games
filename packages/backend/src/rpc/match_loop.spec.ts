@@ -1,6 +1,6 @@
-import { Message, MoveMessage, OpCode, StartMessage } from "@twin-games/shared";
+import { Mark, Message, MoveMessage, OpCode, StartMessage, UpdateMessage } from "@twin-games/shared";
 import { constants, GameLoopResult, State } from "../constants";
-import { matchLoop } from "../match_loop"
+import { matchLoop } from "./match_loop"
 
 interface DispatcherMessage {
   opCode: OpCode; data: Message; broadcast: any;
@@ -53,7 +53,7 @@ const startGameState: State = {
       userId: "50cebfd0-70bd-4886-b4ad-b2e67c8ff59f", username: "VrUsyjiqSr"
     }
   },
-  winner: 1,
+  winner: null,
   winnerPositions: null,
   gameLoopResult: GameLoopResult.Unknown,
 }
@@ -140,7 +140,7 @@ describe("matchLoop", () => {
     const nakamaRuntime = {} as any
     const matchDispatcher = new MockMatchDispatcher();
     const matchMessages: MockMatchMessage[] = [{
-      data: JSON.stringify({position: 1} as MoveMessage),
+      data: JSON.stringify({position: 0} as MoveMessage),
       opCode: OpCode.MOVE,
       sender: { userId: Player0Uuid },
     } as MockMatchMessage]
@@ -155,12 +155,17 @@ describe("matchLoop", () => {
       matchDispatcher as any, 1, matchState, matchMessages as any[]) as { state: State }
 
     expect(result.state.gameLoopResult).toBe(GameLoopResult.PlayerMoved)
+    expect(result.state.playing).toBeTruthy()
     expect(matchDispatcher.messages.length).toBe(1)
 
-    const opCodeWithStartMsg = matchDispatcher.messages[0]
-    expect(opCodeWithStartMsg.opCode).toBe(OpCode.START)
-    const msg = opCodeWithStartMsg.data as StartMessage
 
+    const opCodeWithUpdateMessage = matchDispatcher.messages[0]
+    expect(opCodeWithUpdateMessage.opCode).toBe(OpCode.UPDATE)
+    expect(opCodeWithUpdateMessage.broadcast).toBeNull() // should be broadcasted to all players
+    const msg = opCodeWithUpdateMessage.data as UpdateMessage
+
+    expect(msg.board.join(',')).toBe('0,,,,,,,,')
+    expect(msg.mark).toBe(Mark.O)
     expect(msg.deadline).toBeGreaterThan(0)
 
   })
