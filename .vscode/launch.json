@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "debug-jest-current-file-packages/backend",
+            "cwd": "${workspaceFolder}/packages/backend",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/jest-cli/bin/jest.js",
+            "stopOnEntry": false,
+            "args": [
+                "--runInBand",
+                "--testPathPattern=${fileBasenameNoExtension}",
+            ],
+            
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy", // needed for v8    
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
+        }
+    ]
+}

@@ -28,6 +28,9 @@ export enum GameLoopResult {
     Initialized = 'Initialized',
     Start = 'Start',
     NotEnoughPlayers = 'NotEnoughPlayers',   
+    PlayerMoved = 'PlayerMoved',
+    Winner = 'Winner',
+    Tie = 'Tie',
 }
   
 

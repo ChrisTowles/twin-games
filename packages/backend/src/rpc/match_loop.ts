@@ -13,9 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { msecToSec } from './rpc/daily_rewards'
+import { msecToSec } from './daily_rewards'
 import { Board, Mark, UpdateMessage, OpCode, DoneMessage, StartMessage, MoveMessage, Message } from '@twin-games/shared'
-import { constants, GameLoopResult, MatchLabel, State, winningPositions } from './constants'
+import { constants, GameLoopResult, MatchLabel, State, winningPositions } from '../constants'
 
 
 export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: nkruntime.MatchState, messages: nkruntime.MatchMessage[]) {

@@ -13,25 +13,22 @@
 // limitations under the License.
 
 import { moduleName } from './constants'
-import { rpcReward } from './daily_rewards'
+import { rpcReward } from './rpc/daily_rewards'
 import { matchInit, matchJoin, matchJoinAttempt, matchLeave, matchSignal, matchTerminate } from './match_handler'
 import { rpcFindMatch } from './match_rpc'
 import { RpcCommands } from '@twin-games/shared'
+import { rpcHealthCheck } from './rpc/health_check'
 import { matchLoop } from './match_loop'
 
 
-function rpcHealthCheck(ctx: nkruntime.Context, logger: nkruntime.Logger /* nk: nkruntime.Nakama, payload: string */): string {
-  logger.info('health check!.')
-  return JSON.stringify({ msg: 'it works' })
-}
 
 const InitModule: nkruntime.InitModule
         = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, initializer: nkruntime.Initializer) {
-          initializer.registerRpc(RpcCommands.healthcheck, rpcHealthCheck)
+          //initializer.registerRpc(`${RpcCommands.HealthCheck}`, rpcHealthCheck)
 
-          initializer.registerRpc(RpcCommands.Rewards, rpcReward)
+          initializer.registerRpc(`${RpcCommands.Rewards}`, rpcReward)
 
-          initializer.registerRpc(RpcCommands.FindMatch, rpcFindMatch)
+          initializer.registerRpc(`${RpcCommands.FindMatch}`, rpcFindMatch)
 
           initializer.registerMatch(moduleName, {
             matchInit,

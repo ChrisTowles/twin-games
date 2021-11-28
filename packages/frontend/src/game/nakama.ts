@@ -35,10 +35,11 @@ class Nakama {
 
   async findMatch() {
 
-    const data: RpcFindMatchRequest = { fast: true };
-    console.log('Finding match...')
+    const data: RpcFindMatchRequest = {  } as any;
+    console.log('Finding match...- command:', RpcCommands.FindMatch)
     const matches = await this.client!.rpc(this.session!, RpcCommands.FindMatch, data)
 
+    console.log('found match ', matches)
     this.matchID = (matches.payload! as RpcFindMatchResponse).matchIds[0]
     await this.socket!.joinMatch(this.matchID)
     console.log('Matched joined!')
