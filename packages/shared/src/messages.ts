@@ -4,6 +4,19 @@ export enum Mark {
   UNDEFINED = 2,
 }
 
+export const markToString = function(mark: Mark) {
+  switch (mark) {
+    case Mark.X:
+      return 'X';
+    case Mark.O:
+
+      return 'O';
+    case Mark.UNDEFINED:
+      return 'UNDEFINED';
+  }
+}
+
+
 // The complete set of opcodes used for communication between clients and server.
 export enum OpCode {
   // New game round starting.

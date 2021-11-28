@@ -74,7 +74,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
     Object.keys(s.presences).forEach((userId) => {
       s.marks[userId] = marks.shift() ?? null
     })
-    s.mark = Mark.X
+    s.mark = Math.random() < 0.5 ? Mark.X : Mark.O;  // Randomly choose who goes first.
     s.winner = null
     s.winnerPositions = null
     s.deadlineRemainingTicks = calculateDeadlineTicks(s.label)
