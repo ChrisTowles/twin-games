@@ -24,11 +24,11 @@ import { matchLoop } from './match_loop'
 
 const InitModule: nkruntime.InitModule
         = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, initializer: nkruntime.Initializer) {
-          //initializer.registerRpc(`${RpcCommands.HealthCheck}`, rpcHealthCheck)
+          initializer.registerRpc(RpcCommands.HealthCheck, rpcHealthCheck)
 
-          initializer.registerRpc(`${RpcCommands.Rewards}`, rpcReward)
+          initializer.registerRpc(RpcCommands.Rewards, rpcReward)
 
-          initializer.registerRpc(`${RpcCommands.FindMatch}`, rpcFindMatch)
+          initializer.registerRpc(RpcCommands.FindMatch, rpcFindMatch)
 
           initializer.registerMatch(moduleName, {
             matchInit,
