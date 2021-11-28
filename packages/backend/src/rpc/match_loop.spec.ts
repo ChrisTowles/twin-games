@@ -1,4 +1,4 @@
-import { Mark, Message, MoveMessage, OpCode, StartMessage, UpdateMessage } from "@twin-games/shared";
+import { DoneMessage, Mark, Message, MoveMessage, OpCode, StartMessage, UpdateMessage } from "@twin-games/shared";
 import { constants, GameLoopResult, State } from "../constants";
 import { matchLoop } from "./match_loop"
 
@@ -167,6 +167,93 @@ describe("matchLoop", () => {
     expect(msg.board.join(',')).toBe('0,,,,,,,,')
     expect(msg.mark).toBe(Mark.O)
     expect(msg.deadline).toBeGreaterThan(0)
+
+  })
+
+
+  
+  it("matchLoop - Game Winner", () => {
+
+    const context = {} as any
+    const logger = console as any
+    const nakamaRuntime = {} as any
+    const matchDispatcher = new MockMatchDispatcher();
+
+    const matchMessages: MockMatchMessage[] = [{
+      data: JSON.stringify({position: 0} as MoveMessage),
+      opCode: OpCode.MOVE,
+      sender: { userId: Player0Uuid },
+    } as MockMatchMessage]
+
+    const matchState = {
+      ...startGameState,
+      mark: Mark.X,
+      board: [null, Mark.O, null, Mark.X, Mark.O, null, Mark.X, null, null],
+      playing: true,
+    };
+
+
+    const result = matchLoop(context, logger, nakamaRuntime,
+      matchDispatcher as any, 1, matchState, matchMessages as any[]) as { state: State }
+
+    expect(result.state.gameLoopResult).toBe(GameLoopResult.Winner)
+    expect(result.state.playing).toBeFalsy()
+    expect(matchDispatcher.messages.length).toBe(1)
+
+
+    const opCodeWithMsg = matchDispatcher.messages[0]
+    expect(opCodeWithMsg.opCode).toBe(OpCode.DONE)
+    expect(opCodeWithMsg.broadcast).toBeNull() // should be broadcasted to all players
+    const msg = opCodeWithMsg.data as DoneMessage
+
+    expect(msg.board.join(',')).toBe('0,1,,0,1,,0,,')
+    expect(msg.winner).toBe(Mark.X)
+    expect(msg.winnerPositions.join(',')).toBe('0,3,6')
+
+  })
+
+
+  
+  
+  it("matchLoop - Game Tie", () => {
+
+    const context = {} as any
+    const logger = console as any
+    const nakamaRuntime = {} as any
+    const matchDispatcher = new MockMatchDispatcher();
+
+    const matchMessages: MockMatchMessage[] = [{
+      data: JSON.stringify({position: 0} as MoveMessage),
+      opCode: OpCode.MOVE,
+      sender: { userId: Player0Uuid },
+    } as MockMatchMessage]
+
+    const matchState = {
+      ...startGameState,
+      mark: Mark.X,
+      board: [null, Mark.X, Mark.O,
+         Mark.O, Mark.X, Mark.X, 
+         Mark.X, Mark.O, Mark.O],
+      playing: true,
+    };
+
+
+    const result = matchLoop(context, logger, nakamaRuntime,
+      matchDispatcher as any, 1, matchState, matchMessages as any[]) as { state: State }
+
+    expect(result.state.gameLoopResult).toBe(GameLoopResult.Tie)
+    expect(result.state.playing).toBeFalsy()
+    expect(matchDispatcher.messages.length).toBe(1)
+
+
+    const opCodeWithMsg = matchDispatcher.messages[0]
+    expect(opCodeWithMsg.opCode).toBe(OpCode.DONE)
+    expect(opCodeWithMsg.broadcast).toBeNull() // should be broadcasted to all players
+    const msg = opCodeWithMsg.data as DoneMessage
+
+    expect(msg.board.join(',')).toBe('0,0,1,1,0,0,0,1,1')
+    expect(msg.winner).toBeNull()
+    expect(msg.winnerPositions).toBeNull()
 
   })
 
