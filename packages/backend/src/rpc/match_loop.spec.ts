@@ -20,12 +20,11 @@ class MockMatchDispatcher {
 }
 
 class MockMatchMessage {
-
   sender: {userId: string};
-  // persistence: boolean;
-  // status: string;
   opCode: OpCode;
   data: string; // JSON.stringify(Message)
+  // persistence: boolean;
+  // status: string;
   //reliable: boolean;
   //receiveTime: number;
 }
