@@ -20,8 +20,7 @@ import { constants, GameLoopResult, MatchLabel, State, winningPositions } from '
 
 export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: nkruntime.MatchState, messages: nkruntime.MatchMessage[]) {
   const s = state as State
-  logger.debug('Running match loop. Tick: %d', tick)
-
+  
   if (Object.keys(s.presences).length + s.joinsInProgress === 0) {
     s.emptyTicks++
     if (s.emptyTicks >= constants.maxEmptySec * constants.tickRate) {
@@ -35,8 +34,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
 
   // If there's no game in progress check if we can (and should) start one!
   if (!s.playing) {
-    logger.debug('no match so checking if we can and should start one.')
-
+   
     // Between games any disconnected users are purged, there's no in-progress game for them to return to anyway.
     // eslint-disable-next-line no-restricted-syntax
     for (const userID in s.presences) {

@@ -13,21 +13,25 @@
 // limitations under the License.
 
 import { moduleName } from './constants'
-// import { rpcReward } from './rpc/daily_rewards'
+import { rpcReward } from './rpc/daily_rewards'
 import { matchInit, matchJoin, matchJoinAttempt, matchLeave, matchSignal, matchTerminate } from './match_handler'
 import { rpcFindMatch } from './rpc/match_rpc'
-import { RpcCommands } from '@twin-games/shared'
-// import { rpcHealthCheck } from './rpc/health_check'
+import { rpcHealthCheck } from './rpc/health_check'
 import { matchLoop } from './rpc/match_loop'
 
 
 
 const InitModule: nkruntime.InitModule
         = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, initializer: nkruntime.Initializer) {
-        //  initializer.registerRpc(`${RpcCommands.HealthCheck}`, rpcHealthCheck)
-//          initializer.registerRpc(`${RpcCommands.Rewards}`, rpcReward)
-          initializer.registerRpc(`${RpcCommands.FindMatch}`, rpcFindMatch)
 
+
+          // Register RPC commands.
+          // Important: You can not anything but a 'string' here, trying to use RpcCommands object completely fails. Not sure why.
+          // but after an hour of testing and failing; magic strings it is. 
+          initializer.registerRpc('health_check', rpcHealthCheck)
+          initializer.registerRpc('rewards_js', rpcReward)
+          initializer.registerRpc('find_match', rpcFindMatch)
+          
           initializer.registerMatch(moduleName, {
             matchInit,
             matchJoinAttempt,
