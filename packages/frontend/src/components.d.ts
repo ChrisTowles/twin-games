@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Board: typeof import('./components/Board.vue')['default']
     CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
     CarbonDicomOverlay: typeof import('~icons/carbon/dicom-overlay')['default']
     CarbonLanguage: typeof import('~icons/carbon/language')['default']
@@ -17,6 +18,7 @@ declare module 'vue' {
     Game: typeof import('./components/game.vue')['default']
     MdiHandshakeOutline: typeof import('~icons/mdi/handshake-outline')['default']
     README: typeof import('./components/README.md')['default']
+    Square: typeof import('./components/Square.vue')['default']
     TicTacToeGame: typeof import('./components/tic-tac-toe-game.vue')['default']
   }
 }

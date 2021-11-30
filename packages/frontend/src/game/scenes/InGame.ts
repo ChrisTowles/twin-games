@@ -60,11 +60,11 @@ export default class InGame extends Phaser.Scene {
   setPlayerTurn(data: StartMessage) {
     const userId = localStorage.getItem('user_id')
 
+    this.playerMark = data.marks[userId!]
 
     if (data.marks[userId!] === data.mark) {
       this.playerTurn = true
-      this.playerMark = data.mark
-      this.headerText!.setText(`Your turn! - (${markToString(this.playerMark)})`)
+      this.headerText!.setText(`Your turn! - (${markToString(this.playerMark!)})`)
     }
     else {
       this.headerText!.setText('Opponents turn!')
@@ -102,7 +102,6 @@ export default class InGame extends Phaser.Scene {
                 element.imageHandle = null
               }
             })
-            this.updatePlayerMark(startMsg)
             this.setPlayerTurn(startMsg)
             this.updateBoard(startMsg.board) // so after restart the board is updated
             break
