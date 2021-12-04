@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Board from '~/components/Board.vue';
 
 /*
 import { useUserStore } from '~/stores/user'
@@ -26,13 +25,6 @@ const go = () => {
       <br />
 
       <tg-board />
-
-      <!--
-      <tic-tac-toe-game></tic-tac-toe-game>
-
-      <board />
-
--->
 
     </v-card-text>
   </v-card>

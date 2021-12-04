@@ -34,7 +34,7 @@ importers:
       typescript: ^4.4.4
     dependencies:
       '@twin-games/shared': link:../shared
-      nakama-runtime: github.com/heroiclabs/nakama-common/bd604bb6dc68382fd0daa2cb4fb84240ec066a3e
+      nakama-runtime: github.com/heroiclabs/nakama-common/e47c06d002f1098968fdc5a86bf1c4afaf767ec8
     devDependencies:
       '@antfu/eslint-config': 0.10.0_eslint@8.3.0+typescript@4.5.2
       '@babel/core': 7.16.0
@@ -80,7 +80,6 @@ importers:
       markdown-it-link-attributes: ^3.0.0
       markdown-it-prism: ^2.2.1
       nprogress: ^0.2.0
-      phaser: ^3.55.2
       pinia: ^2.0.2
       pnpm: ^6.20.3
       prism-theme-vars: ^0.2.2
@@ -109,7 +108,6 @@ importers:
       '@vueuse/core': 7.1.1_vue@3.2.22
       '@vueuse/head': 0.7.2_vue@3.2.22
       nprogress: 0.2.0
-      phaser: 3.55.2
       pinia: 2.0.4_typescript@4.5.2+vue@3.2.22
       prism-theme-vars: 0.2.2
       uuid: 8.3.2
@@ -4296,10 +4294,6 @@ packages:
     resolution: {integrity: sha512-bXE7Dyc1i6oQElDG0jMRZJrRAn9QR2xyyFGmBdZleNmyQX0FqGYmhZIrIrpPfm/w//LTo4tVQGOGQcGCb5q9uw==}
     dev: true
 
-  /eventemitter3/4.0.7:
-    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
-    dev: false
-
   /execa/4.1.0:
     resolution: {integrity: sha512-j5W0//W7f8UxAn8hXVnwG8tLwdiUy4FJLcSupCg6maBYZDpyBvTApK7KyuI4bKj8KOh1r2YH+6ucuYtJv1bTZA==}
     engines: {node: '>=10'}
@@ -5022,6 +5016,7 @@ packages:
 
   /inherits/2.0.3:
     resolution: {integrity: sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=}
+    dev: true
 
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -6737,13 +6732,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /path/0.12.7:
-    resolution: {integrity: sha1-1NwqUGxM4hl+tIHr/NWzbAFAsQ8=}
-    dependencies:
-      process: 0.11.10
-      util: 0.10.4
-    dev: false
-
   /pend/1.2.0:
     resolution: {integrity: sha1-elfrVQpng/kRUzH89GY9XI4AelA=}
     dev: true
@@ -6751,13 +6739,6 @@ packages:
   /performance-now/2.1.0:
     resolution: {integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=}
     dev: true
-
-  /phaser/3.55.2:
-    resolution: {integrity: sha512-amKXsbb2Ht29dGPKvt1edq3yGGYKtq8373GpJYGKPNPnneYY6MtVTOgjHDuZwtmUyK4v86FugkT3hzW/N4tjxQ==}
-    dependencies:
-      eventemitter3: 4.0.7
-      path: 0.12.7
-    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
@@ -6879,11 +6860,6 @@ packages:
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: true
-
-  /process/0.11.10:
-    resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=}
-    engines: {node: '>= 0.6.0'}
-    dev: false
 
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
@@ -8359,12 +8335,6 @@ packages:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
     dev: true
 
-  /util/0.10.4:
-    resolution: {integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==}
-    dependencies:
-      inherits: 2.0.3
-    dev: false
-
   /utils-merge/1.0.1:
     resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
     engines: {node: '>= 0.4.0'}
@@ -9196,8 +9166,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/heroiclabs/nakama-common/bd604bb6dc68382fd0daa2cb4fb84240ec066a3e:
-    resolution: {tarball: https://codeload.github.com/heroiclabs/nakama-common/tar.gz/bd604bb6dc68382fd0daa2cb4fb84240ec066a3e}
+  github.com/heroiclabs/nakama-common/e47c06d002f1098968fdc5a86bf1c4afaf767ec8:
+    resolution: {tarball: https://codeload.github.com/heroiclabs/nakama-common/tar.gz/e47c06d002f1098968fdc5a86bf1c4afaf767ec8}
     name: nakama-runtime
     version: 1.10.0
     dev: false

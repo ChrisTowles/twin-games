@@ -21,20 +21,6 @@ export const useGameServer = () => {
       headerText.value = 'Opponents turn!'
   }
 
-/*
-
-  const updatePlayerMark = (data: StartMessage) => {
-    const userId = localStorage.getItem('user_id')
-
-    if (data.marks[userId!] === data.mark) {
-      playerMark.value = data.mark
-    }
-    else {
-      // if not our turn, then we have the other mark.
-      playerMark.value = data.mark === Mark.X ? Mark.O : Mark.X
-    }
-  };
-*/
   const setPlayerTurn = (data: StartMessage) => {
     const userId = localStorage.getItem('user_id')
 

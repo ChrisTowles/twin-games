@@ -27,7 +27,6 @@ class Nakama {
     this.session = await this.client.authenticateDevice(deviceId, true)
     localStorage.setItem('user_id', this.session.user_id!)
 
-    // ep4
     const trace = false
     this.socket = this.client.createSocket(this.client.useSSL, trace)
     await this.socket.connect(this.session, true)
@@ -41,7 +40,7 @@ class Nakama {
 
     console.log('found match ', matches)
     this.matchID = (matches.payload! as RpcFindMatchResponse).matchIds[0]
-    await this.socket.joinMatch(this.matchID)
+    await this.socket!.joinMatch(this.matchID)
     console.log('Matched joined!', this.matchID)
   }
 

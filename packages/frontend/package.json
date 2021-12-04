@@ -16,7 +16,7 @@
     "@vueuse/core": "^7.1.1",
     "@vueuse/head": "^0.7.2",
     "nprogress": "^0.2.0",
-    "phaser": "^3.55.2",
+    
     "pinia": "^2.0.2",
     "prism-theme-vars": "^0.2.2",
     "uuid": "^8.3.2",
