@@ -41,8 +41,8 @@ class Nakama {
 
     console.log('found match ', matches)
     this.matchID = (matches.payload! as RpcFindMatchResponse).matchIds[0]
-    await this.socket!.joinMatch(this.matchID)
-    console.log('Matched joined!')
+    await this.socket.joinMatch(this.matchID)
+    console.log('Matched joined!', this.matchID)
   }
 
   async makeMove(index: BoardPosition) {

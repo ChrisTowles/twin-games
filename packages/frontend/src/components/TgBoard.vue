@@ -1,50 +1,62 @@
 <template>
     <div class="container">
-
-        <header v-if="calculateWinner" class="header">
-            <h1>{{ calculateWinner }}</h1>
-            <button class="reset" @click="reset">Play Again</button>
+                    <h1>{{ headerText }}</h1>
+                    {{playerMark}}
+        <header  class="header">
+            <button class="reset" @click="findMatchBtn()">Play Game</button>
         </header>
-        <h1 v-else>Next Up: {{ playerValue }}</h1>
-        <span ref="boardRef" class="confetti-origin"></span>
+        
         <div class="board">
             <span class="vertical-line-1"></span>
             <span class="vertical-line-2"></span>
-            <Square
-                v-for="(square, i) in board"
+            <tg-square
+                v-for="(mark, i) in board"
                 :key="`square-${i}`"
                 :label="`square-${i}`"
-                :value="square"
-                @click="markSquare(i)"
-                :winner="calculateWinner"
+                :value="mark"
+                @click="makeMove(i)"
+            ></tg-square>
             />
         </div>
     </div>  
 </template>
 
 <script lang="ts">
-import Square from './Square.vue';
-import { defineComponent, ref } from 'vue';
-import { useBoard } from '../composables/useBoard';
-import { useCalculateWinner } from '../composables/useCalculateWinner';
+import { BoardPosition } from '@twin-games/shared';
+import { useGameServer } from '~/composables/useGameServer';
+import Nakama from '../game/nakama'
+
 export default defineComponent({
-    components: {
-        Square,
-    },
-    setup() {
-        const boardRef: object = ref(null);
-        const { board, playerValue, markSquare, reset } = useBoard();
-        const { calculateWinner } = useCalculateWinner(board, boardRef);
-        return {
-            board,
-            playerValue,
-            markSquare,
-            calculateWinner,
-            boardRef,
-            reset,
-        };
-    },
+  setup() {
+    onMounted(async () => {
+      console.log('mounted!')
+      await Nakama.authenticate()
+    })
+    onUpdated(() => {
+      console.log('updated!')
+    })
+    // if we want this to be async, need to use suspense - https://v3.vuejs.org/guide/migration/suspense.html
+    const {board, headerText, playerMark, playerTurn, findMatch, nakamaListener } = useGameServer();
+ 
+   
+   const findMatchBtn = async () => {
+      await findMatch()
+      nakamaListener()
+    }
+
+     const makeMove = async (index: number) => {
+      await Nakama.makeMove(index as BoardPosition)
+    }
+    
+    console.log('setup!', headerText.value)
+    return { board, headerText, playerMark, playerTurn, findMatchBtn, makeMove }
+  },
+   
+
+
 });
+        
+
 </script>
 
 <style scoped>

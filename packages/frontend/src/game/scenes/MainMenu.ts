@@ -8,7 +8,7 @@ export default class MainMenu extends Phaser.Scene {
   }
 
   create() {
-    Nakama.authenticate()
+    // Nakama.authenticate()
 
     this.add
       .text(CONFIG.WIDTH / 2, 75, 'Welcome to', {

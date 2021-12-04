@@ -25,9 +25,14 @@ const go = () => {
 
       <br />
 
+      <tg-board />
+
+      <!--
       <tic-tac-toe-game></tic-tac-toe-game>
 
       <board />
+
+-->
 
     </v-card-text>
   </v-card>
