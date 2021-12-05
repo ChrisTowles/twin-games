@@ -12,6 +12,8 @@ declare module 'vue' {
     MdiHandshakeOutline: typeof import('~icons/mdi/handshake-outline')['default']
     TgBoard: typeof import('./components/TgBoard.vue')['default']
     TgSquare: typeof import('./components/TgSquare.vue')['default']
+    'TgSquare copy': typeof import('./components/TgSquare copy.vue')['default']
+    TgTimer: typeof import('./components/TgTimer.vue')['default']
   }
 }
 
