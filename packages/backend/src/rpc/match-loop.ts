@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { msecToSec } from './daily_rewards'
+import { msecToSec } from './rewards'
 import { Board, Mark, UpdateMessage, OpCode, DoneMessage, StartMessage, MoveMessage, Message } from '@twin-games/shared'
 import { constants, GameLoopResult, MatchLabel, State, winningPositions } from '../constants'
 
@@ -98,7 +98,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
         logger.debug(`Received move message ${message.sender.userId} from current_mark ${s.mark} user: %v`, s.marks)
 
         const mark = s.marks[message.sender.userId] ?? null
-        if (mark === null || s.mark !== mark) {
+        if (mark === null || getCurrentTurnUserId(s) !== message.sender.userId) {
           // It is not this player's turn.
 
           logger.debug('mark move message from user: %v', s.marks)
@@ -156,6 +156,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
             board: s.board,
             mark: s.mark,
             deadline: currentTimeSecs + Math.floor(s.deadlineRemainingTicks / constants.tickRate),
+            currentTurnUserId: getCurrentTurnUserId(s),
           }
           outgoingMsg = msg
         }
@@ -187,18 +188,37 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
       s.winner = s.mark === Mark.O ? Mark.X : Mark.O
       s.deadlineRemainingTicks = 0
       s.nextGameRemainingTicks = constants.delayBetweenGamesSec * constants.tickRate
-
+      s.gameLoopResult = GameLoopResult.ForfeitDueToTimeout
+      
       const msg: DoneMessage = {
         board: s.board,
         winner: s.winner,
         nextGameStart: currentTimeSecs + Math.floor(s.nextGameRemainingTicks / constants.tickRate),
         winnerPositions: null,
       }
+
       dispatcher.broadcastMessage(OpCode.DONE, JSON.stringify(msg))
     }
   }
 
   return { state: s }
+}
+
+
+export function getCurrentTurnUserId(state: State): string | null {
+
+  let userId: string | null = null
+
+  Object.keys(state.marks).forEach( (key) => {
+    if(state.marks[key] == state.mark){
+      userId = key
+    };
+
+  });
+
+  // no option found
+  return userId
+
 }
 
 

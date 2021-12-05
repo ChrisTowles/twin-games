@@ -1,6 +1,6 @@
 import { DoneMessage, Mark, Message, MoveMessage, OpCode, StartMessage, UpdateMessage } from "@twin-games/shared";
 import { constants, GameLoopResult, State } from "../constants";
-import { matchLoop } from "./match_loop"
+import { matchLoop } from "./match-loop"
 
 interface DispatcherMessage {
   opCode: OpCode; data: Message; broadcast: any;
@@ -252,6 +252,42 @@ describe("matchLoop", () => {
 
     expect(msg.board.join(',')).toBe('0,0,1,1,0,0,0,1,1')
     expect(msg.winner).toBeNull()
+    expect(msg.winnerPositions).toBeNull()
+
+  })
+
+   
+  it("matchLoop - ForfeitDueToTimeout", () => {
+
+    const context = {} as any
+    const logger = console as any
+    const nakamaRuntime = {} as any
+    const matchDispatcher = new MockMatchDispatcher();
+
+    const matchMessages: MockMatchMessage[] = []
+
+    const matchState = {
+      ...startGameState,
+      deadlineRemainingTicks: -1,
+      playing: true,
+    };
+
+
+    const result = matchLoop(context, logger, nakamaRuntime,
+      matchDispatcher as any, 1, matchState, matchMessages as any[]) as { state: State }
+
+    expect(result.state.gameLoopResult).toBe(GameLoopResult.ForfeitDueToTimeout)
+    expect(result.state.playing).toBeFalsy()
+    expect(matchDispatcher.messages.length).toBe(1)
+
+
+    const opCodeWithMsg = matchDispatcher.messages[0]
+    expect(opCodeWithMsg.opCode).toBe(OpCode.DONE)
+    expect(opCodeWithMsg.broadcast).toBeNull() // should be broadcasted to all players
+    const msg = opCodeWithMsg.data as DoneMessage
+
+    expect(msg.board.join(',')).toBe('0,,,,,,,,')
+    expect(msg.winner).toBe(1)
     expect(msg.winnerPositions).toBeNull()
 
   })

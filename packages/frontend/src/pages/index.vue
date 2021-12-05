@@ -24,7 +24,7 @@ const go = () => {
 
       <br />
 
-      <tic-tac-toe-game></tic-tac-toe-game>
+      <tg-board />
 
     </v-card-text>
   </v-card>

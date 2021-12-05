@@ -29,6 +29,8 @@ To get the project up and running will need.
 - `pnpm`
 - `docker`
 
+
+
 ### Tab 1
 
 This will compile Shared, Frontend and Backend and watch for file changes.
@@ -60,6 +62,7 @@ Then expand to other simple party games where each person can use their phone as
 - Planning Points
 - Poker trivia
 - any multiplayer party game.
+
 
 ## Links
 
