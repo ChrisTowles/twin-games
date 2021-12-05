@@ -13,6 +13,7 @@ declare module 'vue' {
     TgBoard: typeof import('./components/TgBoard.vue')['default']
     TgSquare: typeof import('./components/TgSquare.vue')['default']
     'TgSquare copy': typeof import('./components/TgTimer.vue')['default']
+    TgTimer: typeof import('./components/TgTimer.vue')['default']
   }
 }
 

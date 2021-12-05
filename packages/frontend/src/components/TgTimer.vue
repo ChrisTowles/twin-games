@@ -1,36 +1,33 @@
 <template>
-    <div>
-        Timer: {{ timer }}
-
-    </div>
+  <div>
+    Timer: {{ timer }}
+  </div>
 </template>
 
 <script setup lang='ts'>
 
-import {PropType, Ref} from 'vue'
+import { PropType, Ref, ref } from 'vue'
 
 const props = defineProps({
-    label: {
-        type: String,
-    },
-    durationMsec: {
-        type: Number as PropType<number | null>,
-        default: null,
-        required: false, // means it can be null
-    },
+  label: {
+    type: String,
+  },
+  durationMsec: {
+    type: Number as PropType<number | null>,
+    default: null,
+    required: false, // means it can be null
+  },
 })
-
 
 const timer: Ref<number> = ref(10)
 
-let interval = setInterval(() => {
-  if (timer.value === 0) {
-    clearInterval(interval)                
-  } else {
-    timer.value--
-  }             
-}, 1000)
+const interval = setInterval(() => {
+  if (timer.value === 0)
+    clearInterval(interval)
 
+  else
+    timer.value--
+}, 1000)
 
 </script>
 

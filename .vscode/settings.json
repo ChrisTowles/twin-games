@@ -14,5 +14,10 @@
     "*.css": "postcss",
   },
   "editor.formatOnSave": false,
-  "github.copilot.enable":{ "markdown": true}
+  "github.copilot.enable":{ "markdown": true},
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/pnpm-lock.yaml": true
+},
 }
