@@ -188,13 +188,15 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
       s.winner = s.mark === Mark.O ? Mark.X : Mark.O
       s.deadlineRemainingTicks = 0
       s.nextGameRemainingTicks = constants.delayBetweenGamesSec * constants.tickRate
-
+      s.gameLoopResult = GameLoopResult.ForfeitDueToTimeout
+      
       const msg: DoneMessage = {
         board: s.board,
         winner: s.winner,
         nextGameStart: currentTimeSecs + Math.floor(s.nextGameRemainingTicks / constants.tickRate),
         winnerPositions: null,
       }
+
       dispatcher.broadcastMessage(OpCode.DONE, JSON.stringify(msg))
     }
   }

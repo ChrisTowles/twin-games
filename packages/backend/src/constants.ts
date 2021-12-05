@@ -31,6 +31,7 @@ export enum GameLoopResult {
     PlayerMoved = 'PlayerMoved',
     Winner = 'Winner',
     Tie = 'Tie',
+    ForfeitDueToTimeout = 'ForfeitDueToTimeout',
 }
   
 
