@@ -1,22 +1,36 @@
 <template>
-    <button class="square" :name="label">{{  markToString(mark) }}</button>
+    <div>
+        Timer: {{ timer }}
+
+    </div>
 </template>
 
 <script setup lang='ts'>
 
-import {Mark, markToString} from '@twin-games/shared'
-import {PropType} from 'vue'
+import {PropType, Ref} from 'vue'
 
 const props = defineProps({
     label: {
         type: String,
     },
-    mark: {
-        type: Object as PropType<Mark | null>,
+    durationMsec: {
+        type: Number as PropType<number | null>,
         default: null,
         required: false, // means it can be null
     },
 })
+
+
+const timer: Ref<number> = ref(10)
+
+let interval = setInterval(() => {
+  if (timer.value === 0) {
+    clearInterval(interval)                
+  } else {
+    timer.value--
+  }             
+}, 1000)
+
 
 </script>
 

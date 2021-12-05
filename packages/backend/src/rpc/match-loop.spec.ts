@@ -1,6 +1,6 @@
 import { DoneMessage, Mark, Message, MoveMessage, OpCode, StartMessage, UpdateMessage } from "@twin-games/shared";
 import { constants, GameLoopResult, State } from "../constants";
-import { matchLoop } from "./match_loop"
+import { matchLoop } from "./match-loop"
 
 interface DispatcherMessage {
   opCode: OpCode; data: Message; broadcast: any;

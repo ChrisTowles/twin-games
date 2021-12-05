@@ -13,11 +13,18 @@
 // limitations under the License.
 
 import { moduleName } from './constants'
-import { rpcReward } from './rpc/daily_rewards'
-import { matchInit, matchJoin, matchJoinAttempt, matchLeave, matchSignal, matchTerminate } from './match_handler'
-import { rpcFindMatch } from './rpc/match_rpc'
-import { rpcHealthCheck } from './rpc/health_check'
-import { matchLoop } from './rpc/match_loop'
+import { rpcReward } from './rpc/rewards'
+
+import { rpcFindMatch } from './rpc/find-match'
+import { rpcHealthCheck } from './rpc/health-check'
+import { matchLoop } from './rpc/match-loop'
+import { matchInit } from './rpc/match-init'
+import { matchJoinAttempt } from './rpc/match-join-attempt'
+import { matchJoin } from './rpc/match-join'
+import { matchLeave } from './rpc/match-leave'
+import { matchTerminate } from './rpc/match-terminate'
+import { matchSignal } from './rpc/match-signal'
+import { rpcGetServerTimeDiff } from './rpc/get-server-time-diff'
 
 
 
@@ -31,6 +38,7 @@ const InitModule: nkruntime.InitModule
           initializer.registerRpc('health_check', rpcHealthCheck)
           initializer.registerRpc('rewards_js', rpcReward)
           initializer.registerRpc('find_match', rpcFindMatch)
+          initializer.registerRpc('get_server_time_diff', rpcGetServerTimeDiff)
           
           initializer.registerMatch(moduleName, {
             matchInit,

@@ -4,15 +4,16 @@ export enum Mark {
   UNDEFINED = 2,
 }
 
-export const markToString = function(mark: Mark) {
+export const markToString = function(mark: Mark | null) {
   switch (mark) {
     case Mark.X:
       return 'X';
     case Mark.O:
-
       return 'O';
     case Mark.UNDEFINED:
       return 'UNDEFINED';
+    default:
+        return '';
   }
 }
 
@@ -81,11 +82,24 @@ export interface RpcFindMatchRequest {
   fast: boolean
 }
 
+
 // Payload for an RPC response containing match IDs the user can join.
 export interface RpcFindMatchResponse {
   // One or more matches that fit the user's request.
   matchIds: string[]
 }
+
+// Payload to get server time diff
+export interface RpcGetServerTimeDiffRequest {
+  clientTime: number
+}
+
+// Response to get server time diff
+export interface RpcGetServerTimeDiffResponse {
+  clientTimeDiffInMsec: number
+}
+
+
 
 export type Message = StartMessage|UpdateMessage|DoneMessage|MoveMessage|RpcFindMatchRequest|RpcFindMatchResponse
 

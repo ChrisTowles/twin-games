@@ -11,15 +11,19 @@ export const useGameServer = () => {
   const playerMark: Ref<Mark | null> = ref(null)
   const board: Ref<Board> = ref(Array(9).fill(null));
   const playingMatch: Ref<boolean> = ref(false)
+  const serverTimeDiffMsec: Ref<number> = ref(0)
+
+
 
   const updatePlayerTurn = (msg: UpdateMessage) => {
     const userId = localStorage.getItem('user_id')
 
-    if (userId == msg.currentTurnUserId)
+    if (userId == msg.currentTurnUserId) {
       headerText.value = `Your turn! (${markToString(playerMark.value!)})`
-
-    else
+    }
+    else {
       headerText.value = 'Opponents turn!'
+    }
   }
 
   const setPlayerTurn = (data: StartMessage) => {
@@ -32,13 +36,13 @@ export const useGameServer = () => {
       headerText.value = `Your turn! - (${markToString(playerMark.value!)})`
     }
     else {
+      playerTurn.value = false
       headerText.value = 'Opponents turn!'
     }
   }
 
   const endGame = (data: DoneMessage) => {
     board.value = data.board
-
 
     if (data.winner === playerMark.value)
       headerText.value = 'Winner!'
@@ -48,9 +52,14 @@ export const useGameServer = () => {
 
   const findMatch = async () => {
 
+    
     headerText.value = 'Looking for Match'
-    await Nakama.findMatch()
 
+    // get the timeoffset with server, so we can calculate the timmers
+    serverTimeDiffMsec.value = await Nakama.getServerTimeDiff()
+
+    await Nakama.findMatch()
+    
   }
 
 
@@ -93,7 +102,7 @@ export const useGameServer = () => {
     playerMark,
     findMatch,
     nakamaListener,
-    playingMatch
-
+    playingMatch,
+    serverTimeDiffMsec
   };
 };
