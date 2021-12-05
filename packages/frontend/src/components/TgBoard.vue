@@ -2,7 +2,7 @@
     <div class="container">
                     <h1>{{ headerText }}</h1>
                     {{playerMark}}
-        <header  class="header">
+        <header  class="header" v-if="!playingMatch">
             <button class="reset" @click="findMatchBtn()">Play Game</button>
         </header>
         
@@ -36,7 +36,7 @@ export default defineComponent({
       console.log('updated!')
     })
     // if we want this to be async, need to use suspense - https://v3.vuejs.org/guide/migration/suspense.html
-    const {board, headerText, playerMark, playerTurn, findMatch, nakamaListener } = useGameServer();
+    const {board, headerText, playerMark, playingMatch, findMatch, nakamaListener } = useGameServer();
  
    
    const findMatchBtn = async () => {
@@ -49,7 +49,7 @@ export default defineComponent({
     }
     
     console.log('setup!', headerText.value)
-    return { board, headerText, playerMark, playerTurn, findMatchBtn, makeMove }
+    return { board, headerText, playerMark, playingMatch, findMatchBtn, makeMove }
   },
    
 

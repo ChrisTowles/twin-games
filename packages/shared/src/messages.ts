@@ -51,6 +51,7 @@ export interface UpdateMessage {
   board: Board
   // Whose turn it is to play.
   mark: Mark
+  currentTurnUserId: string | null;
   // The deadline time by which the player must submit their move, or forfeit.
   deadline: number
 }

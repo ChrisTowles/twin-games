@@ -16,6 +16,7 @@
 import { msecToSec } from './rpc/daily_rewards'
 import { Mark, UpdateMessage, OpCode, DoneMessage } from '@twin-games/shared'
 import { constants, GameLoopResult, MatchLabel, State } from './constants'
+import { getCurrentTurnUserId } from './rpc/match_loop'
 
 export const matchInit: nkruntime.MatchInitFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, params: {[key: string]: string}) {
   const fast = !!params.fast
@@ -107,6 +108,7 @@ export const matchJoin: nkruntime.MatchJoinFunction = function(ctx: nkruntime.Co
         board: s.board,
         mark: s.mark,
         deadline: t + Math.floor(s.deadlineRemainingTicks / constants.tickRate),
+        currentTurnUserId: getCurrentTurnUserId(s),
       }
       // Send a message to the user that just joined.
       dispatcher.broadcastMessage(OpCode.UPDATE, JSON.stringify(update))
@@ -156,3 +158,4 @@ export const matchTerminate: nkruntime.MatchTerminateFunction = function(ctx: nk
 export const matchSignal: nkruntime.MatchSignalFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: nkruntime.MatchState) {
   return { state }
 }
+

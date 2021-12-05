@@ -10,11 +10,12 @@ export const useGameServer = () => {
   const headerText: Ref<string> = ref('test')
   const playerMark: Ref<Mark | null> = ref(null)
   const board: Ref<Board> = ref(Array(9).fill(null));
+  const playingMatch: Ref<boolean> = ref(false)
 
-  const updatePlayerTurn = () => {
-    playerTurn.value = !playerTurn
+  const updatePlayerTurn = (msg: UpdateMessage) => {
+    const userId = localStorage.getItem('user_id')
 
-    if (playerTurn.value)
+    if (userId == msg.currentTurnUserId)
       headerText.value = `Your turn! (${markToString(playerMark.value!)})`
 
     else
@@ -58,12 +59,12 @@ export const useGameServer = () => {
     if (Nakama.socket !== null) {
       Nakama.socket.onmatchdata = (result: OpCodeAndMessage) => {
 
-        console.log(`socket onmatchdata: ${result.op_code}`, result.data)
+        //  console.log(`socket onmatchdata: ${result.op_code}`, result.data)
         switch (result.op_code) {
           case OpCode.START:
             console.log("start received:", result)
             const startMsg = result.data as StartMessage;
-            
+            playingMatch.value = true
             setPlayerTurn(startMsg)
             board.value = startMsg.board // so after restart the board is updated
             break
@@ -72,7 +73,7 @@ export const useGameServer = () => {
             console.log("update received:", updateMsg)
 
             board.value = updateMsg.board
-            updatePlayerTurn()
+            updatePlayerTurn(updateMsg)
             break
           case OpCode.DONE:
             console.log("DONE received:", result)
@@ -91,6 +92,8 @@ export const useGameServer = () => {
     playerTurn,
     playerMark,
     findMatch,
-    nakamaListener
+    nakamaListener,
+    playingMatch
+
   };
 };

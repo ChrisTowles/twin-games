@@ -4,7 +4,7 @@ export const moduleName = 'tic-tac-toe_js'
 import { Board, Mark, BoardPosition } from '@twin-games/shared'
 
 export const constants = {
-    tickRate: 10, // times per second the matchLoop will be called
+    tickRate: 20, // times per second the matchLoop will be called
     maxEmptySec: 30,
     delayBetweenGamesSec: 5,
     turnTimeFastSec: 30,

@@ -98,7 +98,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
         logger.debug(`Received move message ${message.sender.userId} from current_mark ${s.mark} user: %v`, s.marks)
 
         const mark = s.marks[message.sender.userId] ?? null
-        if (mark === null || s.mark !== mark) {
+        if (mark === null || getCurrentTurnUserId(s) !== message.sender.userId) {
           // It is not this player's turn.
 
           logger.debug('mark move message from user: %v', s.marks)
@@ -156,6 +156,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
             board: s.board,
             mark: s.mark,
             deadline: currentTimeSecs + Math.floor(s.deadlineRemainingTicks / constants.tickRate),
+            currentTurnUserId: getCurrentTurnUserId(s),
           }
           outgoingMsg = msg
         }
@@ -199,6 +200,23 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
   }
 
   return { state: s }
+}
+
+
+export function getCurrentTurnUserId(state: State): string | null {
+
+  let userId: string | null = null
+
+  Object.keys(state.marks).forEach( (key) => {
+    if(state.marks[key] == state.mark){
+      userId = key
+    };
+
+  });
+
+  // no option found
+  return userId
+
 }
 
 
