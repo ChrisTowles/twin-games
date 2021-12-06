@@ -1,7 +1,6 @@
 import { Client, Session, Socket } from '@heroiclabs/nakama-js'
 import { BoardPosition, MoveMessage, OpCode, RpcCommands, RpcFindMatchRequest, RpcFindMatchResponse, RpcGetServerTimeDiffRequest, RpcGetServerTimeDiffResponse } from '@twin-games/shared'
 
-
 import { v4 as uuidv4 } from 'uuid'
 
 class Nakama {
@@ -9,9 +8,9 @@ class Nakama {
   session: Session | null = null
   socket: Socket | null = null
   matchID = ''
-  
+
   constructor() {
-      
+
   }
 
   async authenticate() {
@@ -33,8 +32,7 @@ class Nakama {
   }
 
   async findMatch() {
-
-    const data: RpcFindMatchRequest = { fast:false };
+    const data: RpcFindMatchRequest = { fast: false }
     console.log('Finding match...- command:', RpcCommands.FindMatch)
     const matches = await this.client!.rpc(this.session!, RpcCommands.FindMatch, data)
 
@@ -50,15 +48,13 @@ class Nakama {
     await this.socket!.sendMatchState(this.matchID, OpCode.MOVE, data)
     console.log('Match data sent')
   }
-  async getServerTimeDiff(): Promise<number> {
 
+  async getServerTimeDiff(): Promise<number> {
     const utcMsec = Date.now()
-    const data: RpcGetServerTimeDiffRequest = { clientTime: utcMsec };
+    const data: RpcGetServerTimeDiffRequest = { clientTime: utcMsec }
     const response = await this.client!.rpc(this.session!, RpcCommands.GetServerTimeDiff, data)
     const model = (response.payload! as RpcGetServerTimeDiffResponse)
-    
     return model.clientTimeDiffInMsec
-  
   }
 }
 

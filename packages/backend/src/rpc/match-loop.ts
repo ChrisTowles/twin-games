@@ -13,14 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { msecToSec } from './rewards'
 import { Board, Mark, UpdateMessage, OpCode, DoneMessage, StartMessage, MoveMessage, Message } from '@twin-games/shared'
 import { constants, GameLoopResult, MatchLabel, State, winningPositions } from '../constants'
-
+import { msecToSec } from './rewards'
 
 export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, dispatcher: nkruntime.MatchDispatcher, tick: number, state: nkruntime.MatchState, messages: nkruntime.MatchMessage[]) {
   const s = state as State
-  
+
   if (Object.keys(s.presences).length + s.joinsInProgress === 0) {
     s.emptyTicks++
     if (s.emptyTicks >= constants.maxEmptySec * constants.tickRate) {
@@ -34,7 +33,6 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
 
   // If there's no game in progress check if we can (and should) start one!
   if (!s.playing) {
-   
     // Between games any disconnected users are purged, there's no in-progress game for them to return to anyway.
     // eslint-disable-next-line no-restricted-syntax
     for (const userID in s.presences) {
@@ -72,7 +70,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
     Object.keys(s.presences).forEach((userId) => {
       s.marks[userId] = marks.shift() ?? null
     })
-    s.mark = Math.random() < 0.5 ? Mark.X : Mark.O;  // Randomly choose who goes first.
+    s.mark = Math.random() < 0.5 ? Mark.X : Mark.O // Randomly choose who goes first.
     s.winner = null
     s.winnerPositions = null
     s.deadlineRemainingTicks = calculateDeadlineTicks(s.label)
@@ -102,7 +100,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
           // It is not this player's turn.
 
           logger.debug('mark move message from user: %v', s.marks)
-          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "It is not this player's turn."}), [message.sender])
+          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({ msg: 'It is not this player\'s turn.' }), [message.sender])
           continue
         }
 
@@ -112,13 +110,13 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
         }
         catch (error) {
           // Client sent bad data.
-          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "Malformed JSON received."}), [message.sender])
+          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({ msg: 'Malformed JSON received.' }), [message.sender])
           logger.debug('Bad data received: %v', error)
           continue
         }
         if (s.board[msg.position]) {
           // Client sent a position outside the board, or one that has already been played.
-          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "Client sent a position outside the board, or one that has already been played."}), [message.sender])
+          dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({ msg: 'Client sent a position outside the board, or one that has already been played.' }), [message.sender])
           continue
         }
 
@@ -174,7 +172,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
         break
       default:
         // No other opcodes are expected from the client, so automatically treat it as an error.
-        dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({msg: "No other opcodes are expected from the client, so automatically treat it as an error."}), [message.sender])
+        dispatcher.broadcastMessage(OpCode.REJECTED, JSON.stringify({ msg: 'No other opcodes are expected from the client, so automatically treat it as an error.' }), [message.sender])
         logger.error('Unexpected opcode received: %d', message.opCode)
     }
   }
@@ -189,7 +187,7 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
       s.deadlineRemainingTicks = 0
       s.nextGameRemainingTicks = constants.delayBetweenGamesSec * constants.tickRate
       s.gameLoopResult = GameLoopResult.ForfeitDueToTimeout
-      
+
       const msg: DoneMessage = {
         board: s.board,
         winner: s.winner,
@@ -204,23 +202,17 @@ export const matchLoop: nkruntime.MatchLoopFunction = function(ctx: nkruntime.Co
   return { state: s }
 }
 
-
 export function getCurrentTurnUserId(state: State): string | null {
-
   let userId: string | null = null
 
-  Object.keys(state.marks).forEach( (key) => {
-    if(state.marks[key] == state.mark){
+  Object.keys(state.marks).forEach((key) => {
+    if (state.marks[key] == state.mark)
       userId = key
-    };
-
-  });
+  })
 
   // no option found
   return userId
-
 }
-
 
 function calculateDeadlineTicks(l: MatchLabel): number {
   if (l.fast === 1)

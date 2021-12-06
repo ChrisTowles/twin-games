@@ -1,8 +1,8 @@
 import { RpcGetServerTimeDiffRequest, RpcGetServerTimeDiffResponse } from '@twin-games/shared'
 
 export const rpcGetServerTimeDiff: nkruntime.RpcFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, payload: string): string {
-  const utcMsec = new Date().getTime()
-  logger.info('rpcGetServerTimeDiff!')
+  const utcMsec = Date.now()
+  logger.info('rpcGetServerTimeDiff!', utcMsec)
 
   if (!payload)
     throw new Error('Expects payload.')

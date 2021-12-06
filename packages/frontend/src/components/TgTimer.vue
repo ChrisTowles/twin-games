@@ -1,12 +1,17 @@
 <template>
   <div>
-    Timer: {{ timer }}
+    <h2>
+      Timer: {{ msToTime(timerLocal) }}
+    </h2>
   </div>
 </template>
 
 <script setup lang='ts'>
 
-import { PropType, Ref, ref } from 'vue'
+import { onMounted, PropType, Ref, ref, watch, computed } from 'vue'
+
+const timerLocal: Ref<number> = ref(0)
+const plusOne = computed(() => timerLocal.value + 1)
 
 const props = defineProps({
   label: {
@@ -18,18 +23,49 @@ const props = defineProps({
     required: false, // means it can be null
   },
 })
+let interval = null
+const startTimer = (count: number) => {
+  timerLocal.value = count
+  interval = setInterval(() => {
+    if (timerLocal.value <= 1000) {
+      timerLocal.value = 0
+      clearInterval(interval)
+    }
+    else {
+      timerLocal.value -= 1000
+    }
+  }, 1000)
 
-const timer: Ref<number> = ref(10)
+  return interval
+}
 
-const interval = setInterval(() => {
-  if (timer.value <= 0) {
-    timer.value = 0
+watch(() => props.durationMsec, (count, prevCount) => {
+  if (interval)
     clearInterval(interval)
-  }
-  else {
-    timer.value -= 1000
-  }
-}, 1000)
+
+  startTimer(count)
+})
+
+const timer: Ref<number> = ref(0)
+
+onMounted (() => {
+  timer.value = props.durationMsec
+
+  if (timer.value > 0)
+    startTimer(timer.value)
+})
+
+const msToTime = (duration: number) => {
+  // const milliseconds = Math.floor((duration % 1000) / 100)
+  let seconds: number | string = Math.floor((duration / 1000) % 60)
+  let minutes: number | string = Math.floor((duration / (1000 * 60)) % 60)
+
+  minutes = (minutes < 10) ? `0${minutes}` : minutes
+  seconds = (seconds < 10) ? `0${seconds}` : seconds
+
+  return `${minutes}:${seconds}`
+}
+console.log(msToTime(300000))
 
 </script>
 

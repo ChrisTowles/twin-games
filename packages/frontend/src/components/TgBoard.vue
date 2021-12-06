@@ -2,12 +2,6 @@
   <div class="container">
     <h1>{{ headerText }}</h1>
 
-    <p>
-      {{ serverTimeDiffMsec }}
-    </p>
-
-    <tg-timer :duration-msec="timer" />
-
     <header v-if="!playingMatch" class="header">
       <button class="reset" @click="findMatchBtn()">
         Play Game
@@ -25,6 +19,8 @@
         @click="makeMove(i)"
       ></tg-square>
     </div>
+
+    <tg-timer v-if="showTimer" :duration-msec="timer" />
   </div>
 </template>
 
@@ -44,7 +40,7 @@ export default defineComponent({
       console.log('updated!')
     })
     // if we want this to be async, need to use suspense - https://v3.vuejs.org/guide/migration/suspense.html
-    const { board, headerText, playerMark, playingMatch, findMatch, nakamaListener, serverTimeDiffMsec, timer } = useGameServer()
+    const { board, headerText, playerMark, playingMatch, findMatch, nakamaListener, serverTimeDiffMsec, timer, showTimer } = useGameServer()
     const findMatchBtn = async() => {
       await findMatch()
       nakamaListener()
@@ -52,8 +48,8 @@ export default defineComponent({
     const makeMove = async(index: number) => {
       await Nakama.makeMove(index as BoardPosition)
     }
-    console.log('setup!', headerText.value)
-    return { board, headerText, playerMark, playingMatch, findMatchBtn, makeMove, serverTimeDiffMsec, timer }
+
+    return { board, headerText, playerMark, playingMatch, findMatchBtn, makeMove, serverTimeDiffMsec, timer, showTimer }
   },
 })
 
