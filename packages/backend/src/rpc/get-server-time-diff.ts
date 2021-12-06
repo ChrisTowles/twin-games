@@ -1,8 +1,7 @@
 import { RpcGetServerTimeDiffRequest, RpcGetServerTimeDiffResponse } from '@twin-games/shared'
 
 export const rpcGetServerTimeDiff: nkruntime.RpcFunction = function(ctx: nkruntime.Context, logger: nkruntime.Logger, nk: nkruntime.Nakama, payload: string): string {
-  
-  let utcMsec = Date.now();
+  const utcMsec = new Date().getTime()
   logger.info('rpcGetServerTimeDiff!')
 
   if (!payload)
@@ -16,10 +15,10 @@ export const rpcGetServerTimeDiff: nkruntime.RpcFunction = function(ctx: nkrunti
     logger.error('Error parsing json message: %q', error)
     throw error
   }
-  
-  const diff = request.clientTime - utcMsec;
 
-  let response : RpcGetServerTimeDiffResponse = {clientTimeDiffInMsec: diff }
+  const diff = request.clientTime - utcMsec
+
+  const response: RpcGetServerTimeDiffResponse = { clientTimeDiffInMsec: diff }
 
   return JSON.stringify(response)
 }

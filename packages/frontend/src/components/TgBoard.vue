@@ -1,63 +1,61 @@
 <template>
-    <div class="container">
-                    <h1>{{ headerText }}</h1>
-                    
-                    <p>
-                    {{serverTimeDiffMsec}}
+  <div class="container">
+    <h1>{{ headerText }}</h1>
 
-</p>
+    <p>
+      {{ serverTimeDiffMsec }}
+    </p>
 
-            <tg-timer :duration-msec="10000" />
-                    
-        <header  class="header" v-if="!playingMatch">
-            <button class="reset" @click="findMatchBtn()">Play Game</button>
-        </header>
-        
-        <div class="board">
-            <span class="vertical-line-1"></span>
-            <span class="vertical-line-2"></span>
-            <tg-square
-                v-for="(mark, i) in board"
-                :key="`square-${i}`"
-                :label="`square-${i}`"
-                :mark="mark"
-                @click="makeMove(i)"
-            ></tg-square>
-            
-        </div>
-    </div>  
+    <tg-timer :duration-msec="timer" />
+
+    <header v-if="!playingMatch" class="header">
+      <button class="reset" @click="findMatchBtn()">
+        Play Game
+      </button>
+    </header>
+
+    <div class="board">
+      <span class="vertical-line-1"></span>
+      <span class="vertical-line-2"></span>
+      <tg-square
+        v-for="(mark, i) in board"
+        :key="`square-${i}`"
+        :label="`square-${i}`"
+        :mark="mark"
+        @click="makeMove(i)"
+      ></tg-square>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { BoardPosition } from '@twin-games/shared';
-import { useGameServer } from '~/composables/useGameServer';
+import { BoardPosition } from '@twin-games/shared'
+import { defineComponent, onMounted, onUpdated } from 'vue'
 import Nakama from '../game/nakama'
-import TgTimer from './TgTimer.vue';
+import { useGameServer } from '../composables/useGameServer'
 
 export default defineComponent({
-    setup() {
-        onMounted(async () => {
-            console.log("mounted!");
-            await Nakama.authenticate();
-        });
-        onUpdated(() => {
-            console.log("updated!");
-        });
-        // if we want this to be async, need to use suspense - https://v3.vuejs.org/guide/migration/suspense.html
-        const { board, headerText, playerMark, playingMatch, findMatch, nakamaListener, serverTimeDiffMsec } = useGameServer();
-        const findMatchBtn = async () => {
-            await findMatch();
-            nakamaListener();
-        };
-        const makeMove = async (index: number) => {
-            await Nakama.makeMove(index as BoardPosition);
-        };
-        console.log("setup!", headerText.value);
-        return { board, headerText, playerMark, playingMatch, findMatchBtn, makeMove, serverTimeDiffMsec };
-    },
-    components: { TgTimer }
-});
-        
+  setup() {
+    onMounted(async() => {
+      console.log('mounted!')
+      await Nakama.authenticate()
+    })
+    onUpdated(() => {
+      console.log('updated!')
+    })
+    // if we want this to be async, need to use suspense - https://v3.vuejs.org/guide/migration/suspense.html
+    const { board, headerText, playerMark, playingMatch, findMatch, nakamaListener, serverTimeDiffMsec, timer } = useGameServer()
+    const findMatchBtn = async() => {
+      await findMatch()
+      nakamaListener()
+    }
+    const makeMove = async(index: number) => {
+      await Nakama.makeMove(index as BoardPosition)
+    }
+    console.log('setup!', headerText.value)
+    return { board, headerText, playerMark, playingMatch, findMatchBtn, makeMove, serverTimeDiffMsec, timer }
+  },
+})
 
 </script>
 

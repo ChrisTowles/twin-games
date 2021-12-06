@@ -22,11 +22,13 @@ const props = defineProps({
 const timer: Ref<number> = ref(10)
 
 const interval = setInterval(() => {
-  if (timer.value === 0)
+  if (timer.value <= 0) {
+    timer.value = 0
     clearInterval(interval)
-
-  else
-    timer.value--
+  }
+  else {
+    timer.value -= 1000
+  }
 }, 1000)
 
 </script>

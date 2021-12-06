@@ -1,21 +1,23 @@
 <template>
-    <button class="square" :name="label">{{  markToString(mark) }}</button>
+  <button class="square" :name="label">
+    {{ markToString(mark) }}
+  </button>
 </template>
 
 <script setup lang='ts'>
 
-import {Mark, markToString} from '@twin-games/shared'
-import {PropType} from 'vue'
+import { Mark, markToString } from '@twin-games/shared'
+import { PropType } from 'vue'
 
 const props = defineProps({
-    label: {
-        type: String,
-    },
-    mark: {
-        type: Object as PropType<Mark | null>,
-        default: null,
-        required: false, // means it can be null
-    },
+  label: {
+    type: String,
+  },
+  mark: {
+    type: [Number] as PropType<Mark | null>,
+    default: null,
+    required: false, // means it can be null
+  },
 })
 
 </script>

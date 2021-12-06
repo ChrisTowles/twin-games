@@ -10,6 +10,7 @@ export const useGameServer = () => {
   const playerMark: Ref<Mark | null> = ref(null)
   const board: Ref<Board> = ref(Array(9).fill(null))
   const playingMatch: Ref<boolean> = ref(false)
+  const timer: Ref<number> = ref(0)
   const serverTimeDiffMsec: Ref<number> = ref(0)
 
   const updatePlayerTurn = (msg: UpdateMessage) => {
@@ -72,6 +73,8 @@ export const useGameServer = () => {
             const updateMsg = result.data as UpdateMessage
             console.log('update received:', updateMsg)
 
+            timer.value = Date.now() - updateMsg.deadline
+            console.log('update  timer.value:', timer.value)
             board.value = updateMsg.board
             updatePlayerTurn(updateMsg)
             break
@@ -95,5 +98,6 @@ export const useGameServer = () => {
     nakamaListener,
     playingMatch,
     serverTimeDiffMsec,
+    timer,
   }
 }
