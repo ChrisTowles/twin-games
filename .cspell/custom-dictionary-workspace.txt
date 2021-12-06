@@ -1,0 +1,19 @@
+# Custom Dictionary Words
+camelcase
+demi
+iconify
+Nakama
+nprogress
+phaserjs
+pinia
+pnpm
+prebuild
+precommit
+typecheck
+typedoc
+unplugin
+vite
+vitejs
+vuetify
+vueuse
+windicss

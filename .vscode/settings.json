@@ -1,9 +1,13 @@
 {
   "cSpell.words": [
     "",
+    "antfu",
     "Firestore",
+    "heroiclabs",
     "nakama",
-    "nkruntime"
+    "Nakama",
+    "nkruntime",
+    "onmatchdata"
   ],
   "prettier.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
@@ -20,4 +24,15 @@
     "**/node_modules": true,
     "**/pnpm-lock.yaml": true
 },
+"cSpell.customDictionaries": {
+  "custom-dictionary-workspace": {
+    "name": "custom-dictionary-workspace",
+    "path": "${workspaceFolder:twin-games}/.cspell/custom-dictionary-workspace.txt",
+    "addWords": true,
+    "scope": "workspace"
+  }
+},
+"cSpell.ignoreWords": [
+  "xoxo"
+],
 }
